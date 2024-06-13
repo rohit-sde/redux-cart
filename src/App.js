@@ -20,13 +20,15 @@ function App() {
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(sendCartData(cart));
-
         if (isInitial) {
             isInitial = false;
             return;
         }
-    }, [cart]);
+
+        if (cart.changed) {
+            dispatch(sendCartData(cart));
+        }
+    }, [cart, dispatch]);
 
     return (
         <Fragment>
